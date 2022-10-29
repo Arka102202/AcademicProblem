@@ -1,39 +1,6 @@
 import java.util.Arrays;
 
 public class SlidingWindowMaximum {
-    static int idx = 0;
-    public static int[] maxSlidingWindow0(int[] nums, int k) {
-        idx = -1;
-        int[] r = new int[nums.length-k+1];
-        int i = 0, l = 0, max = Integer.MIN_VALUE;
-
-        for(int p = 0; p<nums.length; p++){
-            int num = nums[p];
-            if (num > max) {
-                max = num;
-                idx = p;
-            }
-            i++;
-            if(i == k){
-                r[l] = max;
-                int n = nums[l++];
-                if(max == n) {
-                    max = Integer.MIN_VALUE;
-                    int temp = idx+1;
-                    for (; temp <=p; temp++) {
-                        if (nums[temp] > max) {
-                            max = nums[temp];
-                            idx = temp;
-                        }
-                    }
-                }
-                i--;
-            }
-        }
-
-        return r;
-    }
-
     public static int[] maxSlidingWindow(int[] nums, int k){
 
         AVLBstWithDuplicates<Integer> tree = new AVLBstWithDuplicates<>();
